@@ -76,9 +76,6 @@ def numar_divizori(n):
         contor = contor +1
     return div
 
-def test_numar_divizori():
-    assert numar_divizori(5) == 0
-    assert numar_divizori(4) == 3
 
 def alta_lista(lista1):
     """
@@ -98,7 +95,8 @@ def alta_lista(lista1):
         else:
             lista2.append(lista1[i])
     return lista2
-
+def test_alta_lista():
+    assert alta_lista([25,13,13,19]) == [1,13,13,0]
 def Print_Menu():
     print('1. Citire lista')
     print('2. Afiseaza lista dupa eliminarea duplicatelor')
@@ -112,7 +110,8 @@ def main():
     test_afisare_lista()
     test_suma_primelor_n_numere_pozitive()
     test_ordine_crescatoare()
-    test_numar_divizori()
+
+    test_alta_lista()
     l = []
     while True:
 
