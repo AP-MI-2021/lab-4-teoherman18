@@ -46,19 +46,73 @@ def suma_primelor_n_numere_pozitive(lst,n):
 def test_suma_primelor_n_numere_pozitive():
     assert suma_primelor_n_numere_pozitive([2,3,4,5,-2,-1],3) == 9
     assert suma_primelor_n_numere_pozitive([0,2,3,-1,5],3) == 5
+    assert suma_primelor_n_numere_pozitive([2,3,0,-1,-2],4) == 5
+
+def ordine_crescatoare(lst):
+    """
+    Verifica daca toate elementele din lista sunt in ordine crescatoare
+    :param lst: lista de numere intregi
+    :return: True, daca toate elementele din lista sunt in ordine crescatoare, False in caz contrar
+    """
+    copie = []
+    for i in lst:
+        if i >= 0:
+            copie.append(i)
+    for j in range(len(copie)-1):
+        if lst[j] > lst[j+1]:
+            return False
+    return True
+
+def test_ordine_crescatoare():
+    assert ordine_crescatoare([12,13,14,15]) is True
+    assert ordine_crescatoare([17,16,15]) is False
+
+def numar_divizori(n):
+    div = 0
+    contor = 2
+    while contor < n:
+        if n%contor == 0:
+            div = div +1
+        contor = contor +1
+    return div
+
+def test_numar_divizori():
+    assert numar_divizori(5) == 0
+    assert numar_divizori(4) == 3
+
+def alta_lista(lista1):
+    """
+    Afișarea listei obținute din lista inițială în care numerele care apar doar o singură dată sunt
+    nlocuite cu numărul de divizori proprii ai numărului.
+    :param lista1: lista nr intregi
+    :return: rezultat
+    """
+    lista2 = []
+    for i in range(len(lista1)):
+        ok = 1
+        for j in range(len(lista1)):
+            if lista1[i] == lista1[j] and i != j:
+                ok = 0
+        if ok == 1:
+            lista2.append(numar_divizori(lista1[i]))
+        else:
+            lista2.append(lista1[i])
+    return lista2
 
 def Print_Menu():
     print('1. Citire lista')
     print('2. Afiseaza lista dupa eliminarea duplicatelor')
     print('3. Calculeaza suma primelor n numere pozitive din lista')
-    print('4. ')
-    print('5.')
+    print('4. Verifica daca toate elementele din lista sunt in ordine crescatoare')
+    print('5. Listea obținute ')
     print('x. Iesire')
 
 
 def main():
     test_afisare_lista()
     test_suma_primelor_n_numere_pozitive()
+    test_ordine_crescatoare()
+    test_numar_divizori()
     l = []
     while True:
 
@@ -76,9 +130,12 @@ def main():
             elif suma_primelor_n_numere_pozitive(lst,n) != 0:
                 print(suma_primelor_n_numere_pozitive(lst,n))
         elif optiune == "4":
-            print()
+            if ordine_crescatoare(lst) is True:
+                print('DA')
+            elif ordine_crescatoare(lst) is False:
+                print('NU')
         elif optiune == "5":
-            pass
+            print(alta_lista(lst))
         elif optiune == "x":
             break
         else:
